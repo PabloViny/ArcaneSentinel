@@ -11,6 +11,7 @@ class Menu:
         self.window = window
         self.surf = pygame.image.load('./asset/MenuBg.png')
         self.rect = self.surf.get_rect(left=0, top=0)
+        self.menu_option = 0
 
     def run(self):
         pygame.mixer_music.load('./asset/Menu.mp3')
@@ -21,7 +22,8 @@ class Menu:
             self.window.blit(source=self.surf, dest=self.rect)
             self.menu_text(50, "Arcane Sentinel", C_GREEN, ((WIN_WIDTH / 2) + 5, 70))
 
-            self.draw_menu_box(MENU_OPTION, 20, (WIN_WIDTH / 2), 145)
+            self.draw_menu_box(20, (WIN_WIDTH / 2), 145)
+
             pygame.display.flip()
 
             # Check for all events
@@ -29,6 +31,19 @@ class Menu:
                 if event.type == pygame.QUIT:
                     pygame.quit()  # Close window
                     quit()  # End pygame
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_DOWN:
+                        if self.menu_option < len(MENU_OPTION) - 1:
+                            self.menu_option += 1
+                        else:
+                            self.menu_option = 0
+                    if event.key == pygame.K_UP:
+                        if self.menu_option > 0:
+                            self.menu_option -= 1
+                        else:
+                            self.menu_option = len(MENU_OPTION) - 1
+                    if event.key == pygame.K_RETURN:  # ENTER
+                        return MENU_OPTION[self.menu_option]
 
     def menu_text(self, text_size: int, text: str, text_color: tuple, text_center_pos: tuple):
         text_font: Font = pygame.font.SysFont(name="Lucida Sans Typewriter", size=text_size)
@@ -36,6 +51,7 @@ class Menu:
         text_rect: Rect = text_surf.get_rect(center=text_center_pos)
         self.box_surface(text_rect, text_surf)
         self.window.blit(source=text_surf, dest=text_rect)
+        return text_rect, text_surf
 
     # Create a box to insert the title of the game
     def box_surface(self, text_rect: Rect, text: Surface, valid=False):
@@ -55,7 +71,7 @@ class Menu:
         self.window.blit(text, text_rect)
 
     # Create a box to insert menu
-    def draw_menu_box(self, options: list[str], font_size: int, center_x: int, top_y: int):
+    def draw_menu_box(self, font_size: int, center_x: int, top_y: int):
         font = pygame.font.SysFont("Lucida Sans Typewriter", font_size)
 
         # Renders the options to measure
@@ -64,8 +80,11 @@ class Menu:
         total_height = 0
         line_spacing = 5
 
-        for option in options:
-            surf = font.render(option, True, C_WHITE).convert_alpha()
+        for i in range(len(MENU_OPTION)):
+            if i == self.menu_option:
+                surf = font.render(MENU_OPTION[i], True, C_GREEN).convert_alpha()
+            else:
+                surf = font.render(MENU_OPTION[i], True, C_WHITE).convert_alpha()
             text_surfs.append(surf)
             max_width = max(max_width, surf.get_width())
             total_height += surf.get_height() + line_spacing
