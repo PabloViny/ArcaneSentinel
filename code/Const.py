@@ -44,7 +44,7 @@ ENTITY_HEALTH = {
 ENTITY_SHOT_DELAY = {
     'Player1': 40,
     'Player2': 40,
-    'Enemy1-4':200,
+    'Enemy1-4': 200,
 }
 
 ENTITY_DAMAGE = {
@@ -70,7 +70,7 @@ ENTITY_SCORE = {
     'Player2Shot': 0,
     'Enemy1': 50,
     'Enemy1Shot': 0,
-    'Enemy1-2':50,
+    'Enemy1-2': 50,
     'Enemy1-3': 175,
     'Enemy1-4': 200,
     'Enemy1-4Shot': 0,
