@@ -8,13 +8,16 @@ from code.Player import Player
 
 class EntityFactory:
 
-
     @staticmethod
     def get_entity(entity_name: str, position=(0, 0)):
         match entity_name:
             case 'Level1Bg':
                 list_bg = []
                 list_bg.append(Background('Level1Bg', (0, 0)))
+                return list_bg
+            case 'Level2Bg':
+                list_bg = []
+                list_bg.append(Background('Level2Bg', (0, 0)))
                 return list_bg
             case 'Player1':
                 return Player('Player1', (10, WIN_HEIGHT / 2 - 30))
@@ -28,3 +31,10 @@ class EntityFactory:
                 return Enemy('Enemy1-3', (WIN_WIDTH + 10, random.randint(80, WIN_HEIGHT - 100)))
             case 'Enemy1-4':
                 return Enemy('Enemy1-4', (WIN_WIDTH + 10, random.randint(80, WIN_HEIGHT - 100)))
+            case 'Enemy2':
+                return Enemy('Enemy2', (WIN_WIDTH + 10, random.randint(80, WIN_HEIGHT - 100)))
+            case 'Enemy2-2':
+                return Enemy('Enemy2-2', (WIN_WIDTH + 10, random.randint(80, WIN_HEIGHT - 100)))
+            case 'Enemy2-3':
+                return Enemy('Enemy2-3', (WIN_WIDTH + 10, random.randint(80, WIN_HEIGHT - 100)))
+
