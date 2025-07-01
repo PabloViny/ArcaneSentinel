@@ -27,9 +27,6 @@ class Level:
         player.score = player_score[0]
         self.entity_list.append(player)
 
-        # if self.name == 'Level1':
-        # self.timeout -= 15000
-
         if game_mode in [MENU_OPTION[1], MENU_OPTION[2]]:
             player = EntityFactory.get_entity('Player2')
             player.score = player_score[1]

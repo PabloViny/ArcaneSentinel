@@ -26,6 +26,7 @@ class Player(Entity):
         if pressed_key[PLAYER_KEY_RIGHT[self.name]] and self.rect.right < WIN_WIDTH:
             self.rect.centerx += 1
 
+
     def shoot(self):
         self.shot_delay -= 1
         if self.shot_delay == 0:
