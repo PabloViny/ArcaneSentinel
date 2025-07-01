@@ -45,8 +45,8 @@ ENTITY_HEALTH = {
 }
 
 ENTITY_SHOT_DELAY = {
-    'Player1': 40,
-    'Player2': 40,
+    'Player1': 30,
+    'Player2': 50,
     'Enemy1-4': 200,
     'Enemy2-3': 100,
 }
@@ -111,8 +111,18 @@ SPAWN_TIME = 3000
 
 # T
 TIMEOUT_STEP = 100
-TIMEOUT_LEVEL = 20000 #20s
+TIMEOUT_LEVEL = 5000  # 20s
 
 # W
 WIN_WIDTH = 576
 WIN_HEIGHT = 324
+
+# S
+SCORE_POS = {'Title': (WIN_WIDTH / 2, 50),
+             'EnterName': (WIN_WIDTH / 2, 120),
+             'Label': (WIN_WIDTH / 2, 110),
+             'Name': (WIN_WIDTH / 2, 170),
+             0: (WIN_WIDTH / 2, 170),
+             1: (WIN_WIDTH / 2, 225),
+             2: (WIN_WIDTH / 2, 280),
+             }

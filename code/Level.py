@@ -27,8 +27,8 @@ class Level:
         player.score = player_score[0]
         self.entity_list.append(player)
 
-        #if self.name == 'Level1':
-            #self.timeout -= 15000
+        # if self.name == 'Level1':
+        # self.timeout -= 15000
 
         if game_mode in [MENU_OPTION[1], MENU_OPTION[2]]:
             player = EntityFactory.get_entity('Player2')
@@ -39,7 +39,7 @@ class Level:
 
     def run(self, player_score: list[int]):
         pygame.mixer_music.load(f'./asset/{self.name}.mp3')
-        pygame.mixer_music.set_volume(0.3)
+        pygame.mixer_music.set_volume(0.2)
         pygame.mixer_music.play(-1)
         clock = pygame.time.Clock()
         while True:
