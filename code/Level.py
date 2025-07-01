@@ -6,7 +6,7 @@ from pygame import Surface, Rect
 from pygame.font import Font
 
 from code.Const import WIN_HEIGHT, C_WHITE, MENU_OPTION, EVENT_ENEMY, SPAWN_TIME, C_YELLOW, C_YELLOW2, EVENT_TIMEOUT, \
-    TIMEOUT_STEP, TIMEOUT_LEVEL
+    TIMEOUT_STEP, TIMEOUT_LEVEL, ENTITY_DAMAGE, ENTITY_SPEED
 from code.Enemy import Enemy
 from code.Entity import Entity
 from code.EntityFactory import EntityFactory
@@ -19,6 +19,11 @@ class Level:
     def __init__(self, window: Surface, name: str, game_mode: str, player_score: list[int]):
         self.name = name
         self.timeout = TIMEOUT_LEVEL
+        self.spawn_enemy = SPAWN_TIME
+        self.player1_dmg = ENTITY_DAMAGE['Player1Shot']
+        self.player2_dmg = ENTITY_DAMAGE['Player2Shot']
+        self.p1_shot_speed = ENTITY_SPEED['Player1Shot']
+        self.p2_shot_speed = ENTITY_SPEED['Player2Shot']
         self.window = window
         self.game_mode = game_mode
         self.entity_list: list[Entity] = []
@@ -27,11 +32,19 @@ class Level:
         player.score = player_score[0]
         self.entity_list.append(player)
 
+        if self.name == 'Level2':
+            self.spawn_enemy = 2000
+            self.player1_dmg = 35
+            self.player2_dmg = 35
+            self.p1_shot_speed = 3
+            self.p2_shot_speed = 3
+
         if game_mode in [MENU_OPTION[1], MENU_OPTION[2]]:
             player = EntityFactory.get_entity('Player2')
             player.score = player_score[1]
             self.entity_list.append(player)
-        pygame.time.set_timer(EVENT_ENEMY, SPAWN_TIME)
+
+        pygame.time.set_timer(EVENT_ENEMY, self.spawn_enemy)
         pygame.time.set_timer(EVENT_TIMEOUT, TIMEOUT_STEP)
 
     def run(self, player_score: list[int]):
@@ -40,9 +53,11 @@ class Level:
         pygame.mixer_music.play(-1)
         clock = pygame.time.Clock()
         while True:
-            clock.tick(120)
+            clock.tick(90)
             for ent in self.entity_list:
                 self.window.blit(source=ent.surf, dest=ent.rect)
+                if isinstance(ent, Player):
+                    ent.move(self.name)
                 ent.move()
                 if isinstance(ent, (Player, Enemy)):
                     entity_shot = ['Player1', 'Player2', 'Enemy1-4', 'Enemy2-3']

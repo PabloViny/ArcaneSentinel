@@ -13,19 +13,21 @@ class Player(Entity):
         self.shot_delay = ENTITY_SHOT_DELAY[self.name]
         self.power = 0
 
-
-
-    def move(self):
+    def move(self, level: str = 'Level1'):
         pressed_key = pygame.key.get_pressed()
+
         if pressed_key[PLAYER_KEY_UP[self.name]] and self.rect.top > 60:
             self.rect.centery -= 1
-        if pressed_key[PLAYER_KEY_DOWN[self.name]] and self.rect.bottom < WIN_HEIGHT - 55:
-            self.rect.centery += 1
+        if level != 'Level1':
+            if pressed_key[PLAYER_KEY_DOWN[self.name]] and self.rect.bottom < WIN_HEIGHT - 20:
+                self.rect.centery += 1
+        else:
+            if pressed_key[PLAYER_KEY_DOWN[self.name]] and self.rect.bottom < WIN_HEIGHT - 55:
+                self.rect.centery += 1
         if pressed_key[PLAYER_KEY_LEFT[self.name]] and self.rect.left > 0:
             self.rect.centerx -= 1
         if pressed_key[PLAYER_KEY_RIGHT[self.name]] and self.rect.right < WIN_WIDTH:
             self.rect.centerx += 1
-
 
     def shoot(self):
         self.shot_delay -= 1
