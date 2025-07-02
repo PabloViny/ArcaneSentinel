@@ -53,7 +53,6 @@ class Menu:
         self.window.blit(source=text_surf, dest=text_rect)
         return text_rect, text_surf
 
-
     # Create a box to insert the title of the game
     def box_surface(self, text_rect: Rect, text: Surface, valid=False):
         padding = 20

@@ -13,15 +13,12 @@ class Enemy(Entity):
         if (self.name == 'Enemy1-4') or (self.name == 'Enemy2-3'):
             self.shot_delay = ENTITY_SHOT_DELAY[self.name]
 
-
-
     def move(self):
         if (self.name == 'Enemy1-4') or (self.name == 'Enemy2-3'):
-            if self.rect.centerx >= WIN_WIDTH - random.randrange(30,100, 10):
+            if self.rect.centerx >= WIN_WIDTH - random.randrange(30, 100, 10):
                 self.rect.centerx -= ENTITY_SPEED[self.name]
         else:
             self.rect.centerx -= ENTITY_SPEED[self.name]
-
 
     def shoot(self):
         if (self.name == 'Enemy1-4') or (self.name == 'Enemy2-3'):
