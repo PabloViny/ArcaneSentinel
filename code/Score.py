@@ -9,7 +9,6 @@ from code.Const import C_YELLOW, SCORE_POS, MENU_OPTION, C_WHITE, WIN_WIDTH
 from code.DBProxy import DBProxy
 
 
-
 class Score:
 
     def __init__(self, window):
@@ -26,8 +25,9 @@ class Score:
         while True:
             self.window.blit(source=self.surf, dest=self.rect)
             self.score_text(48, 'YOU WIN!!', C_WHITE, SCORE_POS['Title'])
+            text = 'Enter player 1 name (4 characters): '
+            score = player_score[0]
             if game_mode == MENU_OPTION[0]:
-                score = player_score[0]
                 text = 'Enter player 1 name (4 characters): '
             if game_mode == MENU_OPTION[1]:
                 score = (player_score[0] + player_score[1]) / 2
